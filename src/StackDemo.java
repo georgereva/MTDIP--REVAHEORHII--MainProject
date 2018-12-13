@@ -1,37 +1,26 @@
 package First_Prog.Glava_18;
 
-import java.util.EmptyStackException;
-import java.util.Stack;
 
 class StackDeo {
-    static void showpush(Stack<Integer> st, int a) {
-        st.push(a);
-        System.out.println(a);
-        System.out.println(st);
-    }
-
-    static void showpop(Stack<Integer> st) {
-        Integer a = st.pop();
-        System.out.println(a);
-        System.out.println(st);
-    }
-
     public static void main(String[] args) {
-        Stack<Integer> st = new Stack<>();
+        ArrayList<Double> vals = new ArrayList<>();
 
-        System.out.println(st);
+        vals.add(1.0);
+        vals.add(2.0);
+        vals.add(3.0);
+        vals.add(4.0);
+        vals.add(5.0);
 
-        showpush(st, 42);
-        showpush(st, 66);
-        showpush(st, 99);
-        showpop(st);
-        showpop(st);
-        showpop(st);
+        Spliterator<Double> spliterator = vals.spliterator();
+        while (spliterator.tryAdvance((n) -> System.out.println(n)));
+        System.out.println();
 
-        try {
-            showpop(st);
-        } catch (EmptyStackException e) {
-            System.out.println("Stack is empty.");
-        }
+        spliterator = vals.spliterator();
+        ArrayList<Double> sqrs = new ArrayList<>();
+        while (spliterator.tryAdvance((n) -> sqrs.add(Math.sqrt(n))));
+
+        spliterator = sqrs.spliterator();
+        spliterator.forEachRemaining((n) -> System.out.println(n));
+        System.out.println();
     }
 }
